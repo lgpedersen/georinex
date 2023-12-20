@@ -268,7 +268,9 @@ def rinexsystem2(
                 fields.extend([None, None])
 
     obs = xarray.Dataset(
-        coords={"time": times, "sv": [f"{system}{i:02d}" for i in range(1, Nsvsys + 1)]}
+         coords={"time": np.array(times, dtype="datetime64"),
+              "sv": [f"{system}{i:02d}"
+                     for i in range(1, Nsvsys + 1)]}
     )
 
     for i, k in enumerate(fields):
