@@ -86,12 +86,15 @@ def navtimeseries(nav: xarray.Dataset):
         ax.plot(lon, lat, label=sv)
 
 
-def receiver_locations(locs: pandas.DataFrame):
+def receiver_locations(locs: pandas.DataFrame, w=False):
     if not isinstance(locs, pandas.DataFrame):
         return
 
     if cartopy is not None:
-        ax = figure().gca(projection=cartopy.crs.PlateCarree())
+        proj = cartopy.crs.PlateCarree()
+        ax = figure().subplots(subplot_kw=dict(projection=proj))
+        if w:
+            ax.set_global()
 
         ax.add_feature(cpf.LAND)
         ax.add_feature(cpf.OCEAN)

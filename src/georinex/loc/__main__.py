@@ -14,6 +14,7 @@ import georinex as gr
 
 p = argparse.ArgumentParser(description="plot receiver locations")
 p.add_argument("indir", help="path to RINEX 2 or RINEX 3 files")
+p.add_argument("-w", action='store_true', help="show world map")
 p.add_argument(
     "-glob",
     help="file glob pattern",
@@ -28,6 +29,6 @@ flist = gr.globber(indir, p.glob)
 
 locs = gg.get_locations(flist)
 
-grp.receiver_locations(locs)
+grp.receiver_locations(locs, p.w)
 
 show()
